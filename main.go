@@ -8,7 +8,12 @@ import (
 	"github.com/Philip-21/book/storage"
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
+	"gorm.io/gorm"
 )
+
+type Repository struct {
+	DB *gorm.DB
+}
 
 func main() {
 	err := godotenv.Load(".env")
