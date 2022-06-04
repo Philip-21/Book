@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  #declare the list of services we want to launch 
+  postgres:
+    #a prebuilt docker image
+    image: postgres:14.3-alpine 
+    #specify the environment variables 
+    environment:    
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=philippians
+      - POSTGRES_DB=postgres
+
+  api:
+    build: #build the image from the golang source 
+      context: .  #. is the current root folder 
+      dockerfile: Dockerfile #tells docker compose to get the docker file to build the image 
+      #publish the ports to call the api from outside of the container 
+    ports: 
+      - "8080:8080"
+      # tell the api service how to connect to the postgres service 
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=philippians
+      - DB_SSLMODE=disable 
+
+
+          
+      
+
+
+
